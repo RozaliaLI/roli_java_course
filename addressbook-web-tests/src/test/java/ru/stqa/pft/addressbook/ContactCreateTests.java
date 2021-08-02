@@ -18,19 +18,27 @@ public class ContactCreateTests {
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    login();
   }
 
   @Test
   public void testContactCreateTests() throws Exception {
-    wd.get("http://localhost/addressbook/delete.php?part=1;");
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin");
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys("secret");
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
-    wd.findElement(By.linkText("add new")).click();
+    addNewContact();
+    fillContactForm();
+    submitContactCreation();
+    returnToHomePage();
+  }
+
+  private void returnToHomePage() {
+    wd.findElement(By.linkText("home page")).click();
+  }
+
+  private void submitContactCreation() {
+    wd.findElement(By.name("theform")).click();
+    wd.findElement(By.xpath("//input[21]")).click();
+  }
+
+  private void fillContactForm() {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys("Rozalia");
@@ -50,9 +58,20 @@ public class ContactCreateTests {
     wd.findElement(By.name("byear")).click();
     wd.findElement(By.name("byear")).clear();
     wd.findElement(By.name("byear")).sendKeys("1994");
-    wd.findElement(By.name("theform")).click();
-    wd.findElement(By.xpath("//input[21]")).click();
-    wd.findElement(By.linkText("home page")).click();
+  }
+
+  private void addNewContact() {
+    wd.findElement(By.linkText("add new")).click();
+  }
+
+  private void login() {
+    wd.get("http://localhost/addressbook/delete.php?part=1;");
+    wd.findElement(By.name("user")).click();
+    wd.findElement(By.name("user")).clear();
+    wd.findElement(By.name("user")).sendKeys("admin");
+    wd.findElement(By.name("pass")).clear();
+    wd.findElement(By.name("pass")).sendKeys("secret");
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @AfterMethod(alwaysRun = true)
