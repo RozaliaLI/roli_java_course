@@ -20,16 +20,6 @@ public class GroupCreationTests {
     login("admin", "secret");
   }
 
-  private void login(String username, String password) {
-    wd.get("http://localhost/addressbook/");
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(username);
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
-  }
-
   @Test
   public void testGroupCreation() throws Exception {
     goToGroupPage();
@@ -37,6 +27,18 @@ public class GroupCreationTests {
     fillGroupForm(new GroupData("Test1", "Test 2", "Test 3"));
     submitGroupCreation();
     returnToGroupPage();
+  }
+
+  @AfterMethod(alwaysRun = true)
+  public void tearDown() throws Exception {
+    wd.quit();
+  }
+
+  private void login(String username, String password) {
+    wd.get("http://localhost/addressbook/");
+    wd.findElement(By.name("user")).sendKeys(username);
+    wd.findElement(By.name("pass")).sendKeys(password);
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   private void returnToGroupPage() {
@@ -48,14 +50,8 @@ public class GroupCreationTests {
   }
 
   private void fillGroupForm(GroupData groupData) {
-    wd.findElement(By.name("group_name")).click();
-    wd.findElement(By.name("group_name")).clear();
     wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
-    wd.findElement(By.name("group_header")).click();
-    wd.findElement(By.name("group_header")).clear();
     wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
-    wd.findElement(By.name("group_footer")).click();
-    wd.findElement(By.name("group_footer")).clear();
     wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
   }
 
@@ -65,11 +61,6 @@ public class GroupCreationTests {
 
   private void goToGroupPage() {
     wd.findElement(By.linkText("groups")).click();
-  }
-
-  @AfterMethod(alwaysRun = true)
-  public void tearDown() throws Exception {
-    wd.quit();
   }
 
   private boolean isElementPresent(By by) {
