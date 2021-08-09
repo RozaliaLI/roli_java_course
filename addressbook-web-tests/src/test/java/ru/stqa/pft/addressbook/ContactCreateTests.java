@@ -22,7 +22,7 @@ public class ContactCreateTests {
   }
 
   @Test
-  public void testContactCreateTests() throws Exception {
+  public void testContactCreate() throws Exception {
     addNewContact();
     fillContactForm(new ContactNameData("Rozalia", "Latypova"), new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com"), new ContactBirthdayData("10", "May", "1994"));
     submitContactCreation();
