@@ -12,19 +12,22 @@ import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
+
   FirefoxDriver wd;
 
-  private  GroupHelper groupHelper;
+  private NavigationHelper navigationHelper;
+  private GroupHelper groupHelper;
 
   public void init() {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     groupHelper = new GroupHelper(wd);
+    navigationHelper = new NavigationHelper(wd);
     login("admin", "secret");
   }
 
   public void stop() {
-    wd.quit();
+   wd.quit();
   }
 
   private void login(String username, String password) {
@@ -32,10 +35,6 @@ public class ApplicationManager {
     wd.findElement(By.name("user")).sendKeys(username);
     wd.findElement(By.name("pass")).sendKeys(password);
     wd.findElement(By.xpath("//input[@value='Login']")).click();
-  }
-
-  public void goToGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
   }
 
   private boolean isElementPresent(By by) {
@@ -54,10 +53,6 @@ public class ApplicationManager {
     } catch (NoAlertPresentException e) {
       return false;
     }
-  }
-
-  public void returnToHomePage() {
-    wd.findElement(By.linkText("home page")).click();
   }
 
   public void addNewContact() {
@@ -80,5 +75,9 @@ public class ApplicationManager {
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
+  }
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 }

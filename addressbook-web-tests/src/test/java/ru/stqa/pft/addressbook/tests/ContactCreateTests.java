@@ -12,7 +12,7 @@ public class ContactCreateTests extends TestBase{
     app.addNewContact();
     app.fillContactForm(new ContactNameData("Lilia", "Latypova"), new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com"), new ContactBirthdayData("10", "November", "1994"));
     app.submitContactCreation();
-    app.returnToHomePage();
+    app.getNavigationHelper().returnToHomePage();
   }
 
 }
