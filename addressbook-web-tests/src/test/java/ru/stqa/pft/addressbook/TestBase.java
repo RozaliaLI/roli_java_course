@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -77,5 +78,27 @@ public class TestBase {
 
   protected void selectGroup() {
     wd.findElement(By.name("selected[]")).click();
+  }
+
+  protected void returnToHomePage() {
+    wd.findElement(By.linkText("home page")).click();
+  }
+
+  protected void addNewContact() {
+    wd.findElement(By.linkText("add new")).click();
+  }
+
+  protected void submitContactCreation() {
+    wd.findElement(By.xpath("//input[21]")).click();
+  }
+
+  protected void fillContactForm(ContactNameData contactNameData, ContactTelephoneEmailData contactTelephoneEmailData, ContactBirthdayData contactBirthdayData) {
+    wd.findElement(By.name("firstname")).sendKeys(contactNameData.getFirstName());
+    wd.findElement(By.name("lastname")).sendKeys(contactNameData.getLastName());
+    wd.findElement(By.name("mobile")).sendKeys(contactTelephoneEmailData.getMobile());
+    wd.findElement(By.name("email")).sendKeys(contactTelephoneEmailData.getEmail());
+    new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactBirthdayData.getBday());
+    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactBirthdayData.getBmonth());
+    wd.findElement(By.name("byear")).sendKeys(contactBirthdayData.getByear());
   }
 }
