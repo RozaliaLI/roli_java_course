@@ -5,7 +5,7 @@ import ru.stqa.pft.addressbook.model.ContactBirthdayData;
 import ru.stqa.pft.addressbook.model.ContactNameData;
 import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
 
-public class ContactModificationTests extends TestBase{
+public class ContactModificationTests extends TestBase {
 
   @Test
   public void testContactModification() throws Exception {
