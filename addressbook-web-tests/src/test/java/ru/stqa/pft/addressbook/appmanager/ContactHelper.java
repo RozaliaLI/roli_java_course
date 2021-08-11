@@ -7,28 +7,30 @@ import ru.stqa.pft.addressbook.model.ContactBirthdayData;
 import ru.stqa.pft.addressbook.model.ContactNameData;
 import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
 
-public class ContactHelper {
-  private FirefoxDriver wd;
+public class ContactHelper extends HelperBase{
 
   public ContactHelper(FirefoxDriver wd) {
-    this.wd = wd;
+    super(wd);
   }
 
   public void addNewContact() {
-    wd.findElement(By.linkText("add new")).click();
+    click(By.linkText("add new"));
   }
 
   public void submitContactCreation() {
-    wd.findElement(By.xpath("//input[21]")).click();
+    click(By.xpath("//input[21]"));
   }
 
   public void fillContactForm(ContactNameData contactNameData, ContactTelephoneEmailData contactTelephoneEmailData, ContactBirthdayData contactBirthdayData) {
-    wd.findElement(By.name("firstname")).sendKeys(contactNameData.getFirstName());
-    wd.findElement(By.name("lastname")).sendKeys(contactNameData.getLastName());
-    wd.findElement(By.name("mobile")).sendKeys(contactTelephoneEmailData.getMobile());
-    wd.findElement(By.name("email")).sendKeys(contactTelephoneEmailData.getEmail());
+    type(By.name("firstname"), contactNameData.getFirstName());
+    type(By.name("lastname"), contactNameData.getLastName());
+    type(By.name("mobile"), contactTelephoneEmailData.getMobile());
+    type(By.name("email"), contactTelephoneEmailData.getEmail());
+    click(By.name("bday"));
     new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactBirthdayData.getBday());
+    click(By.name("bmonth"));
     new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactBirthdayData.getBmonth());
-    wd.findElement(By.name("byear")).sendKeys(contactBirthdayData.getByear());
+    type(By.name("byear"), contactBirthdayData.getByear());
   }
+
 }

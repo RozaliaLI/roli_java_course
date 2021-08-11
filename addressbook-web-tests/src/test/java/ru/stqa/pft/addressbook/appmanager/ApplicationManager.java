@@ -22,29 +22,12 @@ public class ApplicationManager {
     navigationHelper = new NavigationHelper(wd);
     contactHelper = new ContactHelper(wd);
     sessionHelper = new SessionHelper(wd);
+    wd.get("http://localhost/addressbook/");
     sessionHelper.login("admin", "secret");
   }
 
   public void stop() {
    wd.quit();
-  }
-
-  private boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
   }
 
   public GroupHelper getGroupHelper() {
