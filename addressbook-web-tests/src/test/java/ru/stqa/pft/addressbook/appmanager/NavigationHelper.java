@@ -13,6 +13,10 @@ public class NavigationHelper extends HelperBase{
     click(By.linkText("groups"));
   }
 
+  public void selectItem() {
+    click(By.name("selected[]"));
+  }
+
   public void returnToHomePage() {
     click(By.linkText("home page"));
   }

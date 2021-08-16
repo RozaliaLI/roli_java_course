@@ -33,10 +33,6 @@ public class ContactHelper extends HelperBase{
     type(By.name("byear"), contactBirthdayData.getByear());
   }
 
-  public void selectContact(String id) {
-    click(By.id(id));
-  }
-
   public void initContactModification() {
     click(By.xpath("//img[@alt='Edit']"));
   }

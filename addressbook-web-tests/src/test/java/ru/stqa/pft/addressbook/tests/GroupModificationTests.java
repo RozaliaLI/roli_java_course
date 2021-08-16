@@ -8,7 +8,7 @@ public class GroupModificationTests extends TestBase {
   @Test
   public void testGroupModification() throws Exception {
     app.getNavigationHelper().goToGroupPage();
-    app.getGroupHelper().selectGroup();
+    app.getNavigationHelper().selectItem();
     app.getGroupHelper().initGroupModification();
     app.getGroupHelper().fillGroupForm(new GroupData("Test2", "Test 2", "Test 3"));
     app.getGroupHelper().submitGroupModification();
