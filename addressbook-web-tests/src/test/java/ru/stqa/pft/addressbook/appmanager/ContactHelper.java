@@ -3,8 +3,9 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactBirthdayData;
-import ru.stqa.pft.addressbook.model.ContactNameData;
+import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
 
 public class ContactHelper extends HelperBase{
@@ -21,9 +22,9 @@ public class ContactHelper extends HelperBase{
     click(By.xpath("//input[21]"));
   }
 
-  public void fillContactForm(ContactNameData contactNameData, ContactTelephoneEmailData contactTelephoneEmailData, ContactBirthdayData contactBirthdayData) {
-    type(By.name("firstname"), contactNameData.getFirstName());
-    type(By.name("lastname"), contactNameData.getLastName());
+  public void fillContactForm(ContactData contactData, ContactTelephoneEmailData contactTelephoneEmailData, ContactBirthdayData contactBirthdayData, boolean creation) {
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("lastname"), contactData.getLastName());
     type(By.name("mobile"), contactTelephoneEmailData.getMobile());
     type(By.name("email"), contactTelephoneEmailData.getEmail());
     click(By.name("bday"));
@@ -31,6 +32,12 @@ public class ContactHelper extends HelperBase{
     click(By.name("bmonth"));
     new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactBirthdayData.getBmonth());
     type(By.name("byear"), contactBirthdayData.getByear());
+
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   public void initContactModification() {
