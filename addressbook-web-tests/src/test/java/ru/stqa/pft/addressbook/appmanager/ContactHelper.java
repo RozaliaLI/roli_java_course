@@ -8,7 +8,7 @@ import ru.stqa.pft.addressbook.model.ContactBirthdayData;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
   public ContactHelper(WebDriver wd) {
     super(wd);
