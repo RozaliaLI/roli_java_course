@@ -1,11 +1,19 @@
 package roli.stqa.pft.sandbox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Collections {
 
   public static void main(String[] args) {
     String[] langs = {"Java", "C#", "Python", "PHP"};
 
-    for (String l : langs) {
+    List<String> languages = new ArrayList<String>();
+    languages.add("Java");
+    languages.add("C#");
+    languages.add("Python");
+
+    for (String l : languages) {
       System.out.println("Я хочу изучить " + l);
     }
   }
