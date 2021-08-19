@@ -17,8 +17,8 @@ public class NavigationHelper extends HelperBase{
     } click(By.linkText("groups"));
   }
 
-  public void selectItem() {
-    click(By.name("selected[]"));
+  public void selectItem(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public void goToHomePage() {

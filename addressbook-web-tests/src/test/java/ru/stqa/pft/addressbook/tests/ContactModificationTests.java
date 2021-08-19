@@ -15,7 +15,7 @@ public class ContactModificationTests extends TestBase {
       app.getNavigationHelper().goToHomePage();
     }
     int before = app.getGroupHelper().getGroupCount();
-    app.getNavigationHelper().selectItem();
+    app.getNavigationHelper().selectItem(before - 1);
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Lilia", "Latypova", null), new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com"), new ContactBirthdayData("10", "November", "1994"), false);
     app.getContactHelper().submitContactModification();
