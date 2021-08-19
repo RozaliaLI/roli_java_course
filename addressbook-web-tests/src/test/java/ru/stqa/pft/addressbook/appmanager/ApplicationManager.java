@@ -29,7 +29,7 @@ public class ApplicationManager {
       wd = new InternetExplorerDriver();
     }
     wd = new FirefoxDriver();
-    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
     contactHelper = new ContactHelper(wd);
@@ -40,6 +40,10 @@ public class ApplicationManager {
 
   public void stop() {
    wd.quit();
+  }
+
+  public void waitTime() {
+    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
   }
 
   public GroupHelper getGroupHelper() {
