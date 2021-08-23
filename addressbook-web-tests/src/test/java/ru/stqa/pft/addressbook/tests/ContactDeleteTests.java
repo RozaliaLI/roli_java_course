@@ -6,6 +6,8 @@ import ru.stqa.pft.addressbook.model.ContactBirthdayData;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
 
+import java.util.List;
+
 public class ContactDeleteTests extends TestBase {
 
   @Test
@@ -14,11 +16,11 @@ public class ContactDeleteTests extends TestBase {
       app.getContactHelper().createContact(new ContactData("Lilia", "Popova", "Test2"), new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com"), new ContactBirthdayData("10", "November", "1994"), true);
       app.getNavigationHelper().goToHomePage();
     }
-    int before = app.getContactHelper().getContactCount();
-    app.getNavigationHelper().selectItem(before-1);
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getNavigationHelper().selectItem(before.size()-1);
     app.getContactHelper().deleteSelectedContact();
     app.waitTime();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before - 1);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() - 1);
   }
 }
