@@ -5,10 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import ru.stqa.pft.addressbook.model.ContactBirthdayData;
-import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
-import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//input[21]"));
   }
 
-  public void fillContactForm(ContactData contactData, ContactTelephoneEmailData contactTelephoneEmailData, ContactBirthdayData contactBirthdayData, boolean creation) {
+  public void fillContactForm(ContactData contactData, ContactGroup contactGroup, ContactTelephoneEmailData contactTelephoneEmailData, ContactBirthdayData contactBirthdayData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstName());
     type(By.name("lastname"), contactData.getLastName());
     type(By.name("mobile"), contactTelephoneEmailData.getMobile());
@@ -39,7 +36,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("byear"), contactBirthdayData.getByear());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactGroup.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -59,9 +56,9 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector("div.msgbox"));
   }
 
-  public void createContact(ContactData name, ContactTelephoneEmailData contacts, ContactBirthdayData birthday, boolean b) {
+  public void createContact(ContactData name, ContactGroup group, ContactTelephoneEmailData contacts, ContactBirthdayData birthday, boolean b) {
     addNewContact();
-    fillContactForm( name, contacts, birthday, b);
+    fillContactForm( name, group,  contacts, birthday, b);
     submitContactCreation();
   }
 
@@ -78,7 +75,10 @@ public class ContactHelper extends HelperBase {
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=\"entry\"]"));
     for (WebElement element : elements) {
       String name = element.getText();
-      ContactData contact = new ContactData(null, name, null);
+      String[] fullname = name.split(" ");
+      String firstname = fullname[1];
+      String lastname = fullname[0];
+      ContactData contact = new ContactData(firstname,lastname);
       contacts.add(contact);
     }
     return contacts;
