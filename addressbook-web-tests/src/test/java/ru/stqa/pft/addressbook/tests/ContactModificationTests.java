@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
       app.getNavigationHelper().goToHomePage();
     }
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getNavigationHelper().selectItem(before.size() - 1);
+    app.getNavigationHelper().selectItem(before.size()-1);
     app.getContactHelper().initContactModification();
     ContactData contactData = new ContactData(before.get(before.size()-1).getId(), "Lilia", "Latypova");
     ContactGroup contactGroup = new ContactGroup("Test3");
