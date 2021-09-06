@@ -13,7 +13,7 @@ public class ContactCreationTests extends TestBase{
   public void testContactCreate() throws Exception {
     List<ContactData> before = app.getContactHelper().getContactList();
     ContactData contact = new ContactData("Lilia", "Latypova");
-    ContactGroup contactGroup = new ContactGroup("Test3");
+    ContactGroup contactGroup = new ContactGroup("NewGroup");
     ContactTelephoneEmailData phoneEmail = new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com");
     ContactBirthdayData birthDay = new ContactBirthdayData("10", "November", "1994");
     app.getContactHelper().createContact(contact, contactGroup, phoneEmail, birthDay, true);

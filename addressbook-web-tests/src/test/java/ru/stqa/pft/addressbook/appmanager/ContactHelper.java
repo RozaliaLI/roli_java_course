@@ -5,9 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.*;
+import ru.stqa.pft.addressbook.tests.TestBase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -42,8 +45,8 @@ public class ContactHelper extends HelperBase {
     }
   }
 
-  public void initContactModification() {
-    click(By.xpath("//img[@alt='Edit']"));
+  public void initContactModification(int index) {
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();//click(By.xpath("//img[@alt='Edit']"));
   }
 
   public void submitContactModification() {
@@ -72,14 +75,13 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name=\"entry\"]"));
+    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));;
     for (WebElement element : elements) {
-      String name = element.getText();
+      List<WebElement> cells = element.findElements((By.tagName("td")));
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      String[] fullName = name.split(" ");
-      String firstname = fullName[1];
-      String lastname = fullName[0];
-      ContactData contact = new ContactData(id, firstname,lastname);
+      ContactData contact = new ContactData(id, firstname, lastname);
       contacts.add(contact);
     }
     return contacts;
