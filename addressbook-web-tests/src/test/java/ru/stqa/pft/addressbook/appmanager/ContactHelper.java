@@ -64,6 +64,18 @@ public class ContactHelper extends HelperBase {
     submitContactCreation();
   }
 
+  public void modifyContact(ContactData contactData, ContactGroup contactGroup, ContactTelephoneEmailData phoneEmail, ContactBirthdayData birthDay) {
+    fillContactForm(contactData, contactGroup, phoneEmail, birthDay, false);
+    submitContactModification();
+    goToHomePage();
+  }
+
+  public void goToHomePage() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    } click(By.linkText("home"));
+  }
+
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
   }

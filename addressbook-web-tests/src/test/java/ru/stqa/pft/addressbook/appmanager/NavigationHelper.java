@@ -21,10 +21,4 @@ public class NavigationHelper extends HelperBase{
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void goToHomePage() {
-    if (isElementPresent(By.id("maintable"))) {
-      return;
-    } click(By.linkText("home"));
-  }
-
 }
