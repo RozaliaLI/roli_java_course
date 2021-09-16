@@ -6,12 +6,11 @@ import ru.stqa.pft.addressbook.model.ContactBirthdayData;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.ContactGroup;
 import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
-
 import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testContactDelete() {
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData("Lilia", "Popova"), new ContactGroup("Test2"), new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com"), new ContactBirthdayData("10", "November", "1994"), true);

@@ -2,15 +2,16 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.*;
-
+import ru.stqa.pft.addressbook.model.ContactBirthdayData;
+import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.ContactGroup;
+import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTests extends TestBase{
 
-  @Test
+  @Test (enabled = false)
   public void testContactCreate() throws Exception {
     List<ContactData> before = app.getContactHelper().getContactList();
     ContactData contact = new ContactData("Lilia", "Latypova");

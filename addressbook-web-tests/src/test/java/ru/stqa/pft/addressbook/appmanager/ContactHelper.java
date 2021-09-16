@@ -5,12 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.*;
-import ru.stqa.pft.addressbook.tests.TestBase;
-
+import ru.stqa.pft.addressbook.model.ContactBirthdayData;
+import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.ContactGroup;
+import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {

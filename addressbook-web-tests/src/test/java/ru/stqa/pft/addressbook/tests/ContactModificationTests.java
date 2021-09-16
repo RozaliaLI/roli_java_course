@@ -2,15 +2,16 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.*;
-
+import ru.stqa.pft.addressbook.model.ContactBirthdayData;
+import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.ContactGroup;
+import ru.stqa.pft.addressbook.model.ContactTelephoneEmailData;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testContactModification() throws Exception {
     if (! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData("Lilia", "Popova"), new ContactGroup("NewGroup"), new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com"), new ContactBirthdayData("10", "November", "1994"), true);
