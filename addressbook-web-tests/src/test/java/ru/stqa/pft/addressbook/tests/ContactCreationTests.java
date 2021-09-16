@@ -13,16 +13,16 @@ public class ContactCreationTests extends TestBase{
 
   @Test
   public void testContactCreate() throws Exception {
-    List<ContactData> before = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
     ContactData contact = new ContactData("Lilia", "Latypova");
     ContactGroup contactGroup = new ContactGroup("NewGroup");
     ContactTelephoneEmailData phoneEmail = new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com");
     ContactBirthdayData birthDay = new ContactBirthdayData("10", "November", "1994");
-    app.getContactHelper().createContact(contact, contactGroup, phoneEmail, birthDay, true);
-    app.getContactHelper().goToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().create(contact, contactGroup, phoneEmail, birthDay, true);
+    app.contact().homePage();
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
-    contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(),o2.getId())).get().getId());
+
     before.add(contact);
     Comparator<? super ContactData> byId = (k1, k2) -> Integer.compare(k1.getId(), k2.getId());
     before.sort(byId);

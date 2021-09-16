@@ -52,28 +52,32 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void deleteSelectedContact() {
+  public void delete() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
     wd.findElement(By.cssSelector("div.msgbox"));
   }
 
-  public void createContact(ContactData name, ContactGroup group, ContactTelephoneEmailData contacts, ContactBirthdayData birthday, boolean b) {
+  public void create(ContactData name, ContactGroup group, ContactTelephoneEmailData contacts, ContactBirthdayData birthday, boolean b) {
     addNewContact();
     fillContactForm( name, group,  contacts, birthday, b);
     submitContactCreation();
   }
 
-  public void modifyContact(ContactData contactData, ContactGroup contactGroup, ContactTelephoneEmailData phoneEmail, ContactBirthdayData birthDay) {
+  public void modify(ContactData contactData, ContactGroup contactGroup, ContactTelephoneEmailData phoneEmail, ContactBirthdayData birthDay) {
     fillContactForm(contactData, contactGroup, phoneEmail, birthDay, false);
     submitContactModification();
-    goToHomePage();
+    homePage();
   }
 
-  public void goToHomePage() {
+  public void homePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     } click(By.linkText("home"));
+  }
+
+  public void select(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
   public boolean isThereAContact() {
@@ -84,7 +88,7 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));;
     for (WebElement element : elements) {

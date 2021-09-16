@@ -10,14 +10,13 @@ public class GroupCreationTests extends TestBase{
 
   @Test
   public void testGroupCreation() throws Exception {
-    app.getNavigationHelper().goToGroupPage();
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    app.goTo().groupPage();
+    List<GroupData> before = app.group().list();
     GroupData group = new GroupData("Test4", null, null);
-    app.getGroupHelper().createGroup(group);
-    List<GroupData> after = app.getGroupHelper().getGroupList();
-    Assert.assertEquals(after.size(), before.size()+1);
-
-    group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    app.group().create(group);
+    List<GroupData> after = app.group().list();
+    Assert.assertEquals(after.size(), before.size() + 1);
+    
     before.add(group);
     Comparator<? super GroupData> byId = (l1, l2) -> Integer.compare(l1.getId(), l2.getId());
     before.sort(byId);
