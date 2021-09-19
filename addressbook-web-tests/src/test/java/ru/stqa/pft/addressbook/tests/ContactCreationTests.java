@@ -14,10 +14,10 @@ public class ContactCreationTests extends TestBase{
   @Test
   public void testContactCreate() throws Exception {
     List<ContactData> before = app.contact().list();
-    ContactData contact = new ContactData("Lilia", "Latypova");
-    ContactGroup contactGroup = new ContactGroup("NewGroup");
-    ContactTelephoneEmailData phoneEmail = new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com");
-    ContactBirthdayData birthDay = new ContactBirthdayData("10", "November", "1994");
+    ContactData contact = new ContactData().withFirstName("Lilia").withLastName("Latypova");
+    ContactGroup contactGroup = new ContactGroup().withGroup("NewGroup");
+    ContactTelephoneEmailData phoneEmail = new ContactTelephoneEmailData().withMobile("89878786787").withEmail("roiulatypova@gmail.com");
+    ContactBirthdayData birthDay = new ContactBirthdayData().withBday("10").withBmonth("November").withByear("1994");
     app.contact().create(contact, contactGroup, phoneEmail, birthDay, true);
     app.contact().homePage();
     List<ContactData> after = app.contact().list();

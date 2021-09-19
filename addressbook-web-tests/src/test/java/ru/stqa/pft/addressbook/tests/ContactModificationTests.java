@@ -15,7 +15,9 @@ public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions () {
     if (app.contact().list().size() == 0) {
-      app.contact().create(new ContactData("Lilia", "Popova"), new ContactGroup("NewGroup"), new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com"), new ContactBirthdayData("10", "November", "1994"), true);
+      app.contact().create(new ContactData().withFirstName("Lilia").withLastName("Popova"), new ContactGroup().withGroup("NewGroup"),
+              new ContactTelephoneEmailData().withMobile("89878786787").withEmail("roiulatypova@gmail.com"),
+              new ContactBirthdayData().withBday("10").withBmonth("November").withByear("1994"), true);
       app.contact().homePage();
     }
   }
@@ -25,10 +27,11 @@ public class ContactModificationTests extends TestBase {
     List<ContactData> before = app.contact().list();
     int index = before.size()-1;
     app.contact().initContactModification(index);
-    ContactData contactData = new ContactData(before.get(index).getId(), "Lilia", "Latypova");
-    ContactGroup contactGroup = new ContactGroup("NewGroup");
-    ContactTelephoneEmailData phoneEmail = new ContactTelephoneEmailData("89878786787", "roiulatypova@gmail.com");
-    ContactBirthdayData birthDay = new ContactBirthdayData("10", "November", "1994");
+    ContactData contactData = new ContactData()
+            .withId(before.get(index).getId()).withFirstName("Lilia").withLastName("Latypova");
+    ContactGroup contactGroup = new ContactGroup().withGroup("NewGroup");
+    ContactTelephoneEmailData phoneEmail = new ContactTelephoneEmailData().withMobile("89878786787").withEmail("roiulatypova@gmail.com");
+    ContactBirthdayData birthDay = new ContactBirthdayData().withBday("10").withBmonth("November").withByear("1994");
     app.contact().modify(contactData, contactGroup, phoneEmail, birthDay);
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size());

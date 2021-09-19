@@ -1,12 +1,17 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactTelephoneEmailData {
-  private final String mobile;
-  private final String email;
+  private String mobile;
+  private String email;
 
-  public ContactTelephoneEmailData(String mobile, String email) {
+  public ContactTelephoneEmailData withMobile(String mobile) {
     this.mobile = mobile;
+    return this;
+  }
+
+  public ContactTelephoneEmailData withEmail(String email) {
     this.email = email;
+    return this;
   }
 
   public String getMobile() {
@@ -16,4 +21,5 @@ public class ContactTelephoneEmailData {
   public String getEmail() {
     return email;
   }
+
 }

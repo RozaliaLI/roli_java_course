@@ -3,28 +3,23 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  private int id;
-  private final String firstName;
-  private final String lastName;
+  private int id = Integer.MAX_VALUE;
+  private String firstName;
+  private String lastName;
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
-  }
-
-  public ContactData(String firstName, String lastName) {
-    this.id = Integer.MAX_VALUE;
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
-
-  public ContactData(int id, String firstName, String lastName) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withFirstName(String firstName) {
     this.firstName = firstName;
+    return this;
+  }
+
+  public ContactData withLastName(String lastName) {
     this.lastName = lastName;
+    return this;
   }
 
   public int getId() {
@@ -39,10 +34,6 @@ public class ContactData {
     return lastName;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
   @Override
   public String toString() {
     return "ContactData{" +
@@ -50,6 +41,14 @@ public class ContactData {
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
             '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName);
   }
 
   @Override
