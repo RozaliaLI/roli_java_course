@@ -45,6 +45,16 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.xpath("//img[@alt='Edit']")).click();
   }
 
+  public void initContactModificationById(int id) {
+    /*WebElement checkbox = wd.findElement(By.cssSelector("input[id='" + id +"']"));
+    WebElement row = checkbox.findElement(By.xpath("./../.."));
+    List<WebElement> cells = row.findElements(By.tagName("td"));
+    cells.get(7).findElement(By.tagName("a")).click();*/
+
+    //wd.findElement(By.xpath("//input[@id='" + id +"']/../../td[8]/a")).click();
+    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+  }
+
   public void submitContactModification() {
     click(By.name("update"));
   }

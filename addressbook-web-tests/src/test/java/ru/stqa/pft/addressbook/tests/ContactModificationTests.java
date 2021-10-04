@@ -22,7 +22,8 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() throws Exception {
     Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
-    app.contact().initContactModification(modifiedContact);
+    //app.contact().initContactModification(modifiedContact);
+    app.contact().initContactModificationById(modifiedContact.getId());
     ContactData contactData = new ContactData()
             .withId(modifiedContact.getId()).withFirstName("Lilia").withLastName("Latypova");
     ContactGroup contactGroup = new ContactGroup().withGroup("NewGroup");
