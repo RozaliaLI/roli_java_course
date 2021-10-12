@@ -64,6 +64,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
     wd.findElement(By.cssSelector("div.msgbox"));
+    contactCashe = null;
   }
 
   public void selectContactById(int id) {
@@ -74,11 +75,13 @@ public class ContactHelper extends HelperBase {
     addNewContact();
     fillContactForm( name, group,  contacts, birthday, b);
     submitContactCreation();
+    contactCashe = null;
   }
 
   public void modify(ContactData contactData, ContactGroup contactGroup, ContactTelephoneEmailData phoneEmail, ContactBirthdayData birthDay) {
     fillContactForm(contactData, contactGroup, phoneEmail, birthDay, false);
     submitContactModification();
+    contactCashe = null;
     homePage();
   }
 
@@ -96,7 +99,13 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
+  private Contacts contactCashe = null;
+
   public Contacts all() {
+    if (contactCashe != null) {
+      return new Contacts(contactCashe);
+    }
+
     Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name='entry']"));;
     for (WebElement element : elements) {
