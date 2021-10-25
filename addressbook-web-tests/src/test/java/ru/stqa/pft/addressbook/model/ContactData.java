@@ -6,6 +6,10 @@ public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstName;
   private String lastName;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
+
 
   public ContactData withId(int id) {
     this.id = id;
@@ -21,6 +25,19 @@ public class ContactData {
     this.lastName = lastName;
     return this;
   }
+  public ContactData withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+  public ContactData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public ContactData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
+    return this;
+  }
 
   public int getId() {
     return id;
@@ -32,6 +49,18 @@ public class ContactData {
 
   public String getLastName() {
     return lastName;
+  }
+
+  public String getHomePhone() {
+    return homePhone;
+  }
+
+  public String getMobilePhone() {
+    return mobilePhone;
+  }
+
+  public String getWorkPhone() {
+    return workPhone;
   }
 
   @Override
@@ -55,4 +84,5 @@ public class ContactData {
   public int hashCode() {
     return Objects.hash(id, firstName, lastName);
   }
+
 }
